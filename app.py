@@ -48,7 +48,7 @@ PIXEL_NUMBER = ROW_NUMBER * COLUMN_NUMBER
 trainLabel_data.read(8)
 
 #trainning
-print("Feeding trainning dataset...")
+print("Feeding trainning dataset... [1/4]")
 A = [[], [], [], [], [], [], [], [], [], []]
 for i in range(0, TRAIN_IMAGE_NUMBER):
     lab = int(trainLabel_data.read(1).encode('hex'), 16)
@@ -62,18 +62,18 @@ for i in range(0, TRAIN_IMAGE_NUMBER):
 trainImage_data.close()
 trainLabel_data.close()
 print("done")
-print("\nBuilding Aj...")
+print("\nBuilding Aj... [2/4]")
 for i in range(0, 10):
     A[i] = np.transpose(A[i])
 
-print("\nCalculating SVDs..")
+print("\nCalculating SVDs... [3/4]")
 U = []
 for j in range(0,10):
     u, s, Vh = linalg.svd(A[j],full_matrices=True)
     U.append(u)
     print("%i%% has completed" % ((j+1) * 100 / 10))
 
-print("\nInitializing test data...")
+print("\nInitializing test data... [4/4]")
 k = 28
 testImage = []
 testLabel = []
@@ -89,12 +89,12 @@ for i in range(0, 10000):
 testLabel_data.close()
 testImage_data.close()
 
-print("Initializing done. Ready for test\n")
+print("\nInitializing done. Ready for test.\n")
 plt.title("Predicting Handwritting Digit")
 plt.show(False)
 
 while True:
-    input = raw_input("enter a number from 1 to 10000 ('q' to quit): ")
+    input = raw_input("Enter a number from 1 to 10000 ('q' to quit): ")
     if (input == "q"):
         break
     try:
